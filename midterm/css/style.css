@@ -1,0 +1,88 @@
+
+html, body {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+
+body {
+    display: table;
+    margin: 0 auto;
+    height: 100%;
+    vertical-align: middle;
+}
+
+a:link { color: black; text-decoration: none; }
+a:visited { color: black;; text-decoration: none; }
+a:hover { color: black; text-decoration: underline; }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    vertical-align: middle;
+}
+
+th {
+    background: black;
+    color:#fff;
+    border:0px;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #dadada;
+}
+td {
+    text-align: center;
+}
+
+.container
+{
+    height: 100%;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+select {
+    width: 200px;
+    margin-top: 8px;
+    padding: .5em .5em;
+    border: 1px solid #999;
+    font-family: inherit;
+    border-radius: 5px;
+    background:url("./image/down.png") no-repeat 95% 50%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.textBox input[type="text"] {
+    padding: .5em .5em;
+    width: 300px;
+}
+
+.tags {
+    color: blue;
+}
+.button {
+    padding-top: -10px;
+    margin-left:10px;
+    border: nonㄴe;
+    width: 20px;
+    height: 20px;
+    vertical-align:middle; 
+    cursor: pointer;
+}
+
+select::-ms-expand { display: none; }
+
+img.ui-datepicker-trigger {
+    width: 15px;
+    height: 15px;
+    margin-left: 5px;
+    vertical-align:middle; 
+    cursor:pointer;
+}
+

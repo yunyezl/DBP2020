@@ -40,7 +40,7 @@
         $row2 = mysqli_fetch_array($result2);
         if(mysqli_num_rows($result2) > 0){
             $title .= '<tr>';
-            $title .=  '<th>'.'emp_no'.'</th>';
+            $title .= '<th>'.'emp_no'.'</th>';
             $title .= '<th>'.'birth_date'.'</th>';
             $title .= '<th>'.'first_name'.'</th>';
             $title .= '<th>'.'last_name'.'</th>';

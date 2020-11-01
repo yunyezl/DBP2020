@@ -48,7 +48,7 @@
     <style>
     body {
         font-family: Consolas, monospace;
-        font-fmaily:12px;
+        font-family:12px;
     }
     table {
         width: 100%;
