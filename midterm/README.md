@@ -11,14 +11,14 @@
 ![image](https://user-images.githubusercontent.com/69361613/97792340-2c23b180-1c20-11eb-8049-c682813dcd5a.png)
 
 ### 개발 환경
-1. 데이터베이스 - MariaDB
+1. 데이터베이스 - MariaDB  
 MariaDB가 Mysql보다 가볍고 성능이 빠르다고 들었기 때문에 1차적으로 MariaDB를 선택하기로 했지만 내가 다루는 데이터 수준에서 MariadB와 MySql의 정확한 차이를 알 수 없어서, 여러 자료를 찾아보았고 다음과 같은 자료를 읽게 되었다.  
 [MySQL에서 MariaDB로 마이그레이션 해야 할 10가지 이유](https://xdhyix.wordpress.com/2016/03/24/mysql-%EC%97%90%EC%84%9C-mariadb-%EB%A1%9C-%EB%A7%88%EC%9D%B4%EA%B7%B8%EB%A0%88%EC%9D%B4%EC%85%98-%ED%95%B4%EC%95%BC%ED%95%A0-10%EA%B0%80%EC%A7%80-%EC%9D%B4%EC%9C%A0/)  
 특히 mariaDB는 오라클 독점 데이터베이스가 아닌 오픈 소스이기 때문에 빠른 릴리즈가 이루어진다는 점이 마음에 들었고, 이러한 점을 종합해서 성능면에서도, 디비 특성 자체에서도 MariaDB가 의심 할 여지없이 더 나은 선택이라는 결론이 나왔다.
-2. 백엔드 - PHP
-3. 프론트엔드 - HTML/CSS
+2. 백엔드 - PHP  
+3. 프론트엔드 - HTML/CSS  
 만들다보니 디자인적 요소를 넣고 싶어서 CSS를 추가하였다. 
-4. 서버 - Linux/Apache Web server
+4. 서버 - Linux/Apache Web server  
 Linux 서버를 사용할 경우  +window 환경을 사용할 때보다 보안성 측면에서 우수하며 local이 아닌 실제 서버를 등록할 경우 Linux는 OS 자체가 오픈 소스인 반면 윈도우는 서버로 사용할 경우 리눅스에 비해 훨씬 더 많은 비용이 든다. 또한 대부분의 기관들이 리눅스 서버를 이용하기 때문에 자료가 더 풍부하다고 생각했다. 이러한 이유들로 linux 서버를 선택했다.
 
 ### 선택한 데이터와 출력한 정보
