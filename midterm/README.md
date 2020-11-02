@@ -33,6 +33,7 @@ Linux 서버를 사용할 경우 window 환경을 사용할 때보다 보안성 
 
 ### 발견한 정보
 1. 인기 비디오 정보 조회 
+
 1-1 카테고리별 데이터베이스 조회 : select Box에 있는 정치, 스포츠, 음악 등의 카테고리를 사용자가 선택하면 해당 카테고리에 맞는 데이터를 조회수로 정렬하여 보여줍니다.
 ~~~sql
 SELECT distinct video_id, thumbnail_link, title, channelTitle, channelId, publishedAt, view_count, likes 
