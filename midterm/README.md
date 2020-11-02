@@ -60,7 +60,7 @@ video_id 의 갯수를 세서 가장 많은 비디오를 트렌딩 시킨 채널
 - 최근 3개월 간 트렌딩 횟수가 가장 많은 50개의 채널을 보여줍니다.
 
 3. 사용자가 선호하는 카테고리 리스트 확인하기  
-기본 데이터셋에서 카테고리별로 비디오 정보를 나눈 테이블을 새로 만든 후 각 테이블을 UNION + JOIN 했습니다.  
+선호도를 구하기 위해서 기본 데이터셋에서 동일한 카테고리의 비디오 정보를 저장하는 테이블을 새로 만든 후 각 테이블을 UNION + JOIN 했습니다.  
 ![image](https://user-images.githubusercontent.com/69361613/97838402-76da2200-1d23-11eb-9d5e-66c6185d1167.png)
 ~~~sql
 SELECT categoryName, categoryId, sum(preference) as pre FROM (SELECT categoryName, car.categoryId, likes+view_count+comment_count as preference FROM car INNER JOIN categoryName n ON car.categoryId = n.categoryId GROUP BY video_id) a  
@@ -73,7 +73,7 @@ SELECT categoryName, categoryId, sum(preference) as pre FROM (SELECT categoryNam
     UNION SELECT categoryName, categoryId, sum(a) FROM (SELECT categoryName, tech.categoryId, likes+view_count+comment_count as a FROM tech INNER JOIN categoryName n ON tech.categoryId = n.categoryId GROUP BY video_id) h
     ORDER BY pre DESC;
 ~~~
-기존 데이터셋은 카테고리를 숫자로 제공했기 때문에 별도로 카테고리ID별 categoryName을 저장하는 테이블을 만들어줘야했습니다. 카테고리 아이디와 카테고리 이름을 조인해주는 서브쿼리를 작성하고 해당 서브쿼리에서 한 개의 비디오별로 좋아요, 댓글 수, 조회수(이하 선호도)를 합해주었기 때문에 메인쿼리에서 sum 함수를 이용해서 카테고리가 포함하고 있는 모든 비디오의 선호도를 합해주었습니다. 그리고 선호도별로 정렬을 해야하므로 카테고리별로 구한 선호도를 UNION을 통해 합쳐주었습니다.  
+기존 데이터셋은 카테고리를 숫자로 제공했기 때문에 별도로 카테고리ID별 categoryName을 저장하는 테이블을 추가적으로 만들어줘야했습니다.(categoryName) 이후 카테고리 아이디와 카테고리 이름을 조인해주는 서브쿼리를 작성하고 해당 서브쿼리에서 한 개의 비디오별로 좋아요, 댓글 수, 조회수(이하 선호도)를 합해주었기 때문에 메인쿼리에서 sum 함수를 이용해서 카테고리가 포함하고 있는 모든 비디오의 선호도를 합해주었습니다. 그리고 선호도별로 정렬을 해야하므로 카테고리별로 구한 선호도를 UNION을 통해 합쳐주었습니다.  
 **결론은 카테고리별 사용자 선호도를 구해서 선호도가 높은 순으로 카테고리를 출력**하는 쿼리입니다. 
 
 
