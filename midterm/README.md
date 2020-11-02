@@ -43,17 +43,16 @@ GROUP BY : 일별 트렌딩 데이터이기 때문에, 다른 날짜에 동일�
 ![image](https://user-images.githubusercontent.com/69361613/97792958-89bbfc00-1c28-11eb-9708-505a381eac9a.png)  
 시작일과 종료일을 GET 형식을 통해 받아와서 데이터를 출력했습니다.
 
-2. 가장 많이 트렌딩 된 채널 리스트
+2. 가장 많이 트렌딩 된 채널 리스트 : 최근 3개월 간 트렌딩 횟수가 가장 많은 50개의 채널을 보여줍니다.
 ![image](https://user-images.githubusercontent.com/69361613/97836684-2b724480-1d20-11eb-84d2-bdce26e10b4b.png)
 ~~~sql
 CREATE TABLE trendingCount AS select channelTitle, count(*) as count from KR group by video_id;
 ~~~
 KR 테이블에서 비디오별 트렌딩 횟수를 저장하는 테이블을 새로 생성하여 활용하였습니다.
 ![image](https://user-images.githubusercontent.com/69361613/97836503-ccaccb00-1d1f-11eb-8865-0931791d6d3e.png)
-video_id 의 갯수를 세서 가장 많은 비디오를 트렌딩 시킨 채널들의 순위를 매깁니다.
-- 최근 3개월 간 트렌딩 횟수가 가장 많은 50개의 채널을 보여줍니다.
+video_id 의 갯수를 세서 가장 많은 비디오를 트렌딩 시킨 채널들의 순위를 매깁니다. (한 비디오가 여러 번 트렌딩 된 것은 하나로 간주했습니다)
 
-3. 사용자가 선호하는 카테고리 리스트 확인하기  
+3. 사용자가 선호하는 카테고리 순위 확인하기  
 선호도를 구하기 위해서 기본 데이터셋에서 동일한 카테고리의 비디오 정보를 저장하는 테이블을 새로 만든 후 각 테이블을 UNION + JOIN 했습니다.  
 ![image](https://user-images.githubusercontent.com/69361613/97838402-76da2200-1d23-11eb-9d5e-66c6185d1167.png)
 ~~~sql
