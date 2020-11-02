@@ -5,7 +5,7 @@
 ![image](https://user-images.githubusercontent.com/69361613/97792291-ba4b6800-1c1f-11eb-891a-152e68a0c897.png)
 2. 카테고리별 인기 비디오 리스트
 ![image](https://user-images.githubusercontent.com/69361613/97792304-dcdd8100-1c1f-11eb-839b-ef7184393fbf.png)
-3. 해시태그별 인기 비디오 리스트
+3. 사용자가 검색한 해시태그에 맞는 비디오 리스트
 ![image](https://user-images.githubusercontent.com/69361613/97792326-072f3e80-1c20-11eb-863d-8fd4158f9ff3.png)
 4. 기간별 트렌딩 비디오 리스트
 ![image](https://user-images.githubusercontent.com/69361613/97792340-2c23b180-1c20-11eb-8049-c682813dcd5a.png)
