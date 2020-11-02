@@ -32,7 +32,7 @@ Linux 서버를 사용할 경우 window 환경을 사용할 때보다 보안성 
 원본 데이터 - 단일 테이블로 구성되어있는 데이터셋입니다.
 
 ### 발견한 정보
-1. 인기 비디오 정보 조회 
+1. 인기 비디오 정보 조회 : 각각의 기준에 따라 인기 비디오를 모아 보여줍니다.
 
 1-1 카테고리별 데이터베이스 조회 : select Box에 있는 정치, 스포츠, 음악 등의 카테고리를 사용자가 선택하면 해당 카테고리에 맞는 데이터를 조회수로 정렬하여 보여줍니다.
 ~~~sql
@@ -58,6 +58,7 @@ SELECT distinct video_id, title, channelTitle, channelId, date(trending_date) as
 시작일과 종료일을 GET 형식을 통해 받아와서 데이터를 출력했습니다.
 
 2. 가장 많이 트렌딩 된 채널 리스트 : 최근 3개월 간 트렌딩 횟수가 가장 많은 50개의 채널을 보여줍니다.
+
 ![image](https://user-images.githubusercontent.com/69361613/97836684-2b724480-1d20-11eb-84d2-bdce26e10b4b.png)
 ~~~sql
 CREATE TABLE trendingCount AS select channelTitle, count(*) as count from KR group by video_id;
@@ -70,7 +71,8 @@ SELECT channelTitle, count(video_id) as count, RANK() OVER (ORDER BY count DESC)
 ~~~
 video_id 의 갯수를 세서 가장 많은 비디오를 트렌딩 시킨 채널들의 순위를 매깁니다. (한 비디오가 여러 번 트렌딩 된 것은 하나로 간주했습니다)
 
-3. 사용자가 선호하는 카테고리 순위 확인하기  
+3. 사용자가 선호하는 카테고리 순위 출력 
+
 선호도를 구하기 위해서 기본 데이터셋에서 동일한 카테고리의 비디오 정보를 저장하는 테이블을 새로 만든 후 각 테이블을 UNION + JOIN 했습니다.  
 ![image](https://user-images.githubusercontent.com/69361613/97838402-76da2200-1d23-11eb-9d5e-66c6185d1167.png)
 ~~~sql
