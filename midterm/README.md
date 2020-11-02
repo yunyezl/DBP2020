@@ -31,16 +31,29 @@ Linux 서버를 사용할 경우 window 환경을 사용할 때보다 보안성 
 ![image](https://user-images.githubusercontent.com/69361613/97792803-a48d7100-1c26-11eb-8710-f307de8081f3.png)  
 원본 데이터 - 단일 테이블로 구성되어있는 데이터셋입니다.
 
-1. 비디오 정보 조회 기능
+### 발견한 정보
+1. 인기 비디오 정보 조회 
     1. 카테고리별 데이터베이스 조회 : select Box에 있는 정치, 스포츠, 음악 등의 카테고리를 사용자가 선택하면 해당 카테고리에 맞는 데이터를 조회수로 정렬하여 보여줍니다.
-![image](https://user-images.githubusercontent.com/69361613/97792868-883e0400-1c27-11eb-931c-81422ea876d8.png)  
+~~~sql
+SELECT distinct video_id, thumbnail_link, title, channelTitle, channelId, publishedAt, view_count, likes 
+            FROM KR WHERE categoryId = {$_GET['category']} and month(publishedAt) = 10
+            GROUP BY video_id ORDER BY view_count DESC LIMIT 20
+~~~
 GROUP BY : 일별 트렌딩 데이터이기 때문에, 다른 날짜에 동일한 비디오가 트렌딩 되어 중복 데이터가 다량 발생하였고 따라서 동일한 video_id를 가진 데이터의 경우 하나로 묶고 최초 트렌딩 날짜 기준으로 데이터가 출력되도록 GROUP BY 함수를 이용했습니다.    
 
     2. 태그별 데이터베이스 조회 : 사용자가 해시태그를 검색하면 해당 키워드를 포함하고 있는 비디오 리스트를 출력해서 보여줍니다. LIKE 함수를 이용하였고 기준을 태그로 잡았기 때문에, 제목에 들어가있지 않더라도 태그를 포함하는 비디오가 출력됩니다.
-![image](https://user-images.githubusercontent.com/69361613/97792902-eb2f9b00-1c27-11eb-9669-a17f95ede10e.png)  
+~~~sql
+SELECT distinct video_id, thumbnail_link, title, channelTitle, channelId, date(publishedAt) as publishedAt, view_count, likes, REPLACE(tags, '|', '  #') as tags
+        FROM KR WHERE tags LIKE '%{$_GET['tags']}%' and channelTitle != '피지컬갤러리' and title not like '%가짜사나이%' 
+        GROUP BY video_id ORDER BY view_count DESC LIMIT 20
+~~~
 
     3. 기간별 데이터베이스 조회 : 사용자가 시작일과 종료일을 선택하면 날짜에 맞는 비디오 리스트를 시간순으로 출력합니다. 시작일과 종료일이 적절하지 않게 들어오는 경우를 방지하여 시작일보다 빠른 종료일은 비활성화 되어있습니다.
-![image](https://user-images.githubusercontent.com/69361613/97792958-89bbfc00-1c28-11eb-9708-505a381eac9a.png)  
+~~~sql
+SELECT distinct video_id, title, channelTitle, channelId, date(trending_date) as trending_date, view_count, likes 
+        FROM KR WHERE date(trending_date) >= '{$_GET['fromDate']}' and date(trending_date) <= '{$_GET['toDate']}'
+        GROUP BY video_id ORDER BY trending_date LIMIT 20
+~~~
 시작일과 종료일을 GET 형식을 통해 받아와서 데이터를 출력했습니다.
 
 2. 가장 많이 트렌딩 된 채널 리스트 : 최근 3개월 간 트렌딩 횟수가 가장 많은 50개의 채널을 보여줍니다.
@@ -49,7 +62,11 @@ GROUP BY : 일별 트렌딩 데이터이기 때문에, 다른 날짜에 동일�
 CREATE TABLE trendingCount AS select channelTitle, count(*) as count from KR group by video_id;
 ~~~
 KR 테이블에서 비디오별 트렌딩 횟수를 저장하는 테이블을 새로 생성하여 활용하였습니다.
-![image](https://user-images.githubusercontent.com/69361613/97836503-ccaccb00-1d1f-11eb-8865-0931791d6d3e.png)
+~~~sql
+SELECT channelTitle, count(video_id) as count, RANK() OVER (ORDER BY count DESC) as rank 
+    FROM trendingCount GROUP BY channeltitle 
+    ORDER BY count DESC limit 50;
+~~~
 video_id 의 갯수를 세서 가장 많은 비디오를 트렌딩 시킨 채널들의 순위를 매깁니다. (한 비디오가 여러 번 트렌딩 된 것은 하나로 간주했습니다)
 
 3. 사용자가 선호하는 카테고리 순위 확인하기  
