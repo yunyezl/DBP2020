@@ -44,7 +44,7 @@ GROUP BY : 일별 트렌딩 데이터이기 때문에, 다른 날짜에 동일�
 1-2 태그별 데이터베이스 조회 : 사용자가 해시태그를 검색하면 해당 키워드를 포함하고 있는 비디오 리스트를 출력해서 보여줍니다. LIKE 함수를 이용하였고 기준을 태그로 잡았기 때문에, 제목에 들어가있지 않더라도 태그를 포함하는 비디오가 출력됩니다.
 ~~~sql
 SELECT distinct video_id, thumbnail_link, title, channelTitle, channelId, date(publishedAt) as publishedAt, view_count, likes, REPLACE(tags, '|', '  #') as tags
-        FROM KR WHERE tags LIKE '%{$_GET['tags']}%' and channelTitle != '피지컬갤러리' and title not like '%가짜사나이%' 
+        FROM KR WHERE tags LIKE '%{$_GET['tags']}%'
         GROUP BY video_id ORDER BY view_count DESC LIMIT 20
 ~~~
 
