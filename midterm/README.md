@@ -63,12 +63,12 @@ video_id 의 갯수를 세서 가장 많은 비디오를 트렌딩 시킨 채널
 기본 데이터셋에서 카테고리별로 비디오 정보를 나눈 테이블을 새로 만든 후 각 테이블을 UNION + JOIN 했습니다.  
 ![image](https://user-images.githubusercontent.com/69361613/97838402-76da2200-1d23-11eb-9d5e-66c6185d1167.png)
 ~~~sql
-SELECT categoryName, categoryId, sum(a) as pre FROM (SELECT categoryName, car.categoryId, likes+view_count+comment_count as a FROM car INNER JOIN categoryName n ON car.categoryId = n.categoryId GROUP BY video_id) a  
-    UNION SELECT categoryName, categoryId, sum(a) FROM (SELECT categoryName, animal.categoryId, likes+view_count+comment_count as a FROM animal INNER JOIN categoryName n ON animal.categoryId = n.categoryId GROUP BY video_id) b
-    UNION SELECT categoryName, categoryId, sum(a) FROM (SELECT categoryName, animation.categoryId, likes+view_count+comment_count as a FROM animation INNER JOIN categoryName n ON animation.categoryId = n.categoryId GROUP BY video_id) c  
-    UNION SELECT categoryName, categoryId, sum(a) FROM (SELECT categoryName, game.categoryId, likes+view_count+comment_count as a FROM game INNER JOIN categoryName n ON game.categoryId = n.categoryId GROUP BY video_id) d  
-    UNION SELECT categoryName, categoryId, sum(a) FROM (SELECT categoryName, music.categoryId, likes+view_count+comment_count as a FROM music INNER JOIN categoryName n ON music.categoryId = n.categoryId GROUP BY video_id) e  
-    UNION SELECT categoryName, categoryId, sum(a) FROM (SELECT categoryName, sport.categoryId, likes+view_count+comment_count as a FROM sport INNER JOIN categoryName n ON sport.categoryId = n.categoryId GROUP BY video_id) f
+SELECT categoryName, categoryId, sum(preference) as pre FROM (SELECT categoryName, car.categoryId, likes+view_count+comment_count as preference FROM car INNER JOIN categoryName n ON car.categoryId = n.categoryId GROUP BY video_id) a  
+    UNION SELECT categoryName, categoryId, sum(preference) FROM (SELECT categoryName, animal.categoryId, likes+view_count+comment_count as preference FROM animal INNER JOIN categoryName n ON animal.categoryId = n.categoryId GROUP BY video_id) b
+    UNION SELECT categoryName, categoryId, sum(preference) FROM (SELECT categoryName, animation.categoryId, likes+view_count+comment_count as preference FROM animation INNER JOIN categoryName n ON animation.categoryId = n.categoryId GROUP BY video_id) c  
+    UNION SELECT categoryName, categoryId, sum(preference) FROM (SELECT categoryName, game.categoryId, likes+view_count+comment_count as preference FROM game INNER JOIN categoryName n ON game.categoryId = n.categoryId GROUP BY video_id) d  
+    UNION SELECT categoryName, categoryId, sum(preference) FROM (SELECT categoryName, music.categoryId, likes+view_count+comment_count as preference FROM music INNER JOIN categoryName n ON music.categoryId = n.categoryId GROUP BY video_id) e  
+    UNION SELECT categoryName, categoryId, sum(preference) FROM (SELECT categoryName, sport.categoryId, likes+view_count+comment_count as preference FROM sport INNER JOIN categoryName n ON sport.categoryId = n.categoryId GROUP BY video_id) f
     UNION SELECT categoryName, categoryId, sum(a) FROM (SELECT categoryName, news.categoryId, likes+view_count+comment_count as a FROM news INNER JOIN categoryName n ON news.categoryId = n.categoryId GROUP BY video_id) g  
     UNION SELECT categoryName, categoryId, sum(a) FROM (SELECT categoryName, tech.categoryId, likes+view_count+comment_count as a FROM tech INNER JOIN categoryName n ON tech.categoryId = n.categoryId GROUP BY video_id) h
     ORDER BY pre DESC;
