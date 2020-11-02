@@ -14,7 +14,9 @@ ini_set("display_errors", 1);
     $article = '';
     $title = '';
 
-    $query = "SELECT channelTitle, count(video_id) as count, RANK() OVER (ORDER BY count DESC) as rank FROM trendingCount GROUP BY channeltitle ORDER BY count DESC limit 50;";
+    $query = "SELECT channelTitle, count(video_id) as count, RANK() OVER (ORDER BY count DESC) as rank 
+    FROM trendingCount GROUP BY channeltitle 
+    ORDER BY count DESC limit 50;";
    
     $result = mysqli_query($link, $query);
         

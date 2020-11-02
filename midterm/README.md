@@ -1,14 +1,18 @@
 # 대한민국 트렌딩 유투브 모아보기
-대한민국에서 트렌딩 된 유투브 정보들을 조회할 수 있습니다.
+대한민국에서 트렌딩 된 유투브 정보들을 조회할 수 있습니다. (수정 전은 모두 하나의 정보 같아서 수정했습니다)
 
 1. 메인 화면
 ![image](https://user-images.githubusercontent.com/69361613/97792291-ba4b6800-1c1f-11eb-891a-152e68a0c897.png)
-2. 카테고리별 인기 비디오 리스트
+1-1. 카테고리별 인기 비디오 리스트
 ![image](https://user-images.githubusercontent.com/69361613/97792304-dcdd8100-1c1f-11eb-839b-ef7184393fbf.png)
-3. 사용자가 검색한 해시태그에 맞는 비디오 리스트
+1-2. 사용자가 검색한 해시태그에 맞는 비디오 리스트
 ![image](https://user-images.githubusercontent.com/69361613/97792326-072f3e80-1c20-11eb-863d-8fd4158f9ff3.png)
-4. 기간별 트렌딩 비디오 리스트
+1-3. 기간별 트렌딩 비디오 리스트
 ![image](https://user-images.githubusercontent.com/69361613/97792340-2c23b180-1c20-11eb-8049-c682813dcd5a.png)
+2. 트렌딩 횟수가 가장 많은 채널 TOP 50 
+![image](https://user-images.githubusercontent.com/69361613/97839703-0d0f4780-1d26-11eb-9441-99e99bd31bbe.png)
+3. 사용자 선호도에 따른 카테고리 순위
+![image](https://user-images.githubusercontent.com/69361613/97839843-5495d380-1d26-11eb-9abf-f2c7c23611c5.png)
 
 ### 개발 환경
 1. 데이터베이스 - MariaDB  
@@ -27,23 +31,51 @@ Linux 서버를 사용할 경우 window 환경을 사용할 때보다 보안성 
 ![image](https://user-images.githubusercontent.com/69361613/97792803-a48d7100-1c26-11eb-8710-f307de8081f3.png)  
 여러 개의 테이블이 아닌 단일 테이블로 구성되어있는 데이터베이스
 
-1. 카테고리별 데이터베이스 조회
+1. 인기 비디오 조회 기능
+    1. 카테고리별 데이터베이스 조회
 ![image](https://user-images.githubusercontent.com/69361613/97792868-883e0400-1c27-11eb-931c-81422ea876d8.png)  
 GROUP BY : 일별 트렌딩 데이터이기 때문에, 다른 날짜에 동일한 비디오가 트렌딩 되어 중복 데이터가 다량 발생하였다. 따라서 동일한 video_id를 가진 데이터의 경우 하나로 묶고 최초 트렌딩 날짜 기준으로 데이터가 출력되도록 GROUP BY 함수를 이용하였다.  
 - select Box에 있는 정치, 스포츠, 음악 등의 카테고리를 사용자가 선택하면 해당 카테고리에 맞는 데이터를 조회수로 정렬하여 보여준다.
 
-2. 태그별 데이터베이스 조회
+    2. 태그별 데이터베이스 조회
 ![image](https://user-images.githubusercontent.com/69361613/97792902-eb2f9b00-1c27-11eb-9669-a17f95ede10e.png)  
 DATE 함수 : 해당 테이터베이스는 시간까지 포함하고 있는데, 출력을 할 때 년-월-일 만을 출력하기를 원했다.  
 REPLACE 함수 : 해당 테이터는 tags 속성값들을 | 구분자를 이용해서 구분하였으나 해시태그라는 특성에 맞게 # 로 변경하길 원했다.
 - 사용자가 해시태그를 검색하면 해당 키워드를 포함하고 있는 비디오 리스트를 출력해서 보여준다. LIKE 함수를 이용하였고 기준을 태그로 잡았기 때문에, 제목에 들어가있지 않더라도 태그를 포함하는 비디오가 출력된다.
 
 
-3. 기간별 데이터베이스 조회
+    3. 기간별 데이터베이스 조회
 ![image](https://user-images.githubusercontent.com/69361613/97792958-89bbfc00-1c28-11eb-9708-505a381eac9a.png)  
 시작일과 종료일을 GET 형식을 통해 받아와서 데이터를 출력함.
 - 사용자가 시작일과 종료일을 선택하면 날짜에 맞는 비디오 리스트를 시간순으로 출력한다. 시작일과 종료일이 적절하지 않게 들어오는 경우를 방지하여 시작일보다 빠른 종료일은 비활성화 되어있다.
 
+2. 가장 많이 트렌딩 된 채널 리스트
+![image](https://user-images.githubusercontent.com/69361613/97836684-2b724480-1d20-11eb-84d2-bdce26e10b4b.png)
+~~~sql
+CREATE TABLE trendingCount AS select channelTitle, count(*) as count from KR group by video_id;
+~~~
+KR 테이블에서 비디오별 트렌딩 횟수를 저장하는 테이블을 새로 생성하여 활용하였습니다.
+![image](https://user-images.githubusercontent.com/69361613/97836503-ccaccb00-1d1f-11eb-8865-0931791d6d3e.png)
+video_id 의 갯수를 세서 가장 많은 비디오를 트렌딩 시킨 채널들의 순위를 매깁니다.
+- 최근 3개월 간 트렌딩 횟수가 가장 많은 50개의 채널을 보여줍니다.
 
-[구동영상](https://youtu.be/4lsQ_3Fx9Tw)
+3. 사용자가 선호하는 카테고리 리스트 확인하기  
+기본 데이터셋에서 카테고리별로 비디오 정보를 나눈 테이블을 새로 만든 후 각 테이블을 UNION + JOIN 했습니다.  
+![image](https://user-images.githubusercontent.com/69361613/97838402-76da2200-1d23-11eb-9d5e-66c6185d1167.png)
+~~~sql
+$query = "SELECT categoryName, categoryId, sum(a) as pre FROM (SELECT categoryName, car.categoryId, likes+view_count+comment_count as a FROM car INNER JOIN categoryName n ON car.categoryId = n.categoryId GROUP BY video_id) a  
+    UNION SELECT categoryName, categoryId, sum(a) FROM (SELECT categoryName, animal.categoryId, likes+view_count+comment_count as a FROM animal INNER JOIN categoryName n ON animal.categoryId = n.categoryId GROUP BY video_id) b
+    UNION SELECT categoryName, categoryId, sum(a) FROM (SELECT categoryName, animation.categoryId, likes+view_count+comment_count as a FROM animation INNER JOIN categoryName n ON animation.categoryId = n.categoryId GROUP BY video_id) c  
+    UNION SELECT categoryName, categoryId, sum(a) FROM (SELECT categoryName, game.categoryId, likes+view_count+comment_count as a FROM game INNER JOIN categoryName n ON game.categoryId = n.categoryId GROUP BY video_id) d  
+    UNION SELECT categoryName, categoryId, sum(a) FROM (SELECT categoryName, music.categoryId, likes+view_count+comment_count as a FROM music INNER JOIN categoryName n ON music.categoryId = n.categoryId GROUP BY video_id) e  
+    UNION SELECT categoryName, categoryId, sum(a) FROM (SELECT categoryName, sport.categoryId, likes+view_count+comment_count as a FROM sport INNER JOIN categoryName n ON sport.categoryId = n.categoryId GROUP BY video_id) f
+    UNION SELECT categoryName, categoryId, sum(a) FROM (SELECT categoryName, news.categoryId, likes+view_count+comment_count as a FROM news INNER JOIN categoryName n ON news.categoryId = n.categoryId GROUP BY video_id) g  
+    UNION SELECT categoryName, categoryId, sum(a) FROM (SELECT categoryName, tech.categoryId, likes+view_count+comment_count as a FROM tech INNER JOIN categoryName n ON tech.categoryId = n.categoryId GROUP BY video_id) h
+    ORDER BY pre DESC";
+~~~
+기존 데이터셋은 카테고리를 숫자로 제공했기 때문에 별도로 카테고리ID별 categoryName을 저장하는 테이블을 만들어줘야했습니다. 카테고리 아이디와 카테고리 이름을 조인해주는 서브쿼리를 작성하고 해당 서브쿼리에서 한 비디오별로 좋아요, 댓글 수, 조회수를 합해주었기 때문에 메인쿼리에서 sum 함수를 이용해서 카테고리가 포함하고 있는 모든 비디오의 선호도를 합해주었습니다. 그리고 랭킹을 해야하므로 카테고리별 선호도를 UNION을 통해 합쳐주었습니다.  
+**결론은 카테고리별 사용자 선호도를 구해서 선호도가 높은 순으로 카테고리를 출력**하는 쿼리입니다. 
+
+
+[구동영상](https://youtu.be/WaskIPpcRHo)
 
