@@ -69,7 +69,7 @@ SELECT channelTitle, count(video_id) as count, RANK() OVER (ORDER BY count DESC)
     FROM trendingCount GROUP BY channeltitle 
     ORDER BY count DESC limit 50;
 ~~~
-video_id 의 갯수를 세서 가장 많은 비디오를 트렌딩 시킨 채널들의 순위를 매깁니다. (한 비디오가 여러 번 트렌딩 된 것은 하나로 간주했습니다)
+video_id 의 갯수를 세서 가장 많은 비디오를 트렌딩 시킨 채널들의 순위를 매깁니다.
 
 3. 사용자가 선호하는 카테고리 순위 출력 
 
