@@ -26,7 +26,7 @@ MariaDB가 Mysql보다 가볍고 성능이 빠르다고 들었기 때문에 1차
 Linux 서버를 사용할 경우 window 환경을 사용할 때보다 보안성 측면에서 우수하며 local이 아닌 실제 서버를 등록할 경우 Linux는 OS 자체가 오픈 소스인 반면 윈도우는 서버로 사용할 경우 리눅스에 비해 훨씬 더 많은 비용이 듭니다. 또한 대부분의 기관들이 리눅스 서버를 이용하기 때문에 자료가 더 풍부하다고 생각했으며 후에 현업에 들어갔을 때 더 도움이 될 거라고 생각했습니다. 이러한 이유들로 linux 서버를 선택했습니다.
 
 ### 선택한 데이터와 출력한 정보
-흥미있는 데이터 + 최신의 데이터를 이용하고 싶어서 kaggle 데이터를 이용하기로 했습니다. 그 중에서도 'Youtube Trending Video Dataset(updated daily)' 데이터셋을 사용했다. 매일 데이터가 업데이트 되기 때문에 가장 최신의 데이터를 이용할 수 있었습니다.
+흥미있는 데이터 + 최신의 데이터를 이용하고 싶어서 kaggle 데이터를 이용하기로 했습니다. 그 중에서도 'Youtube Trending Video Dataset(updated daily)' 데이터셋을 사용했습니다.
 ![image](https://user-images.githubusercontent.com/69361613/97792790-6a23d400-1c26-11eb-806c-ddf690f4d530.png)
 ![image](https://user-images.githubusercontent.com/69361613/97792803-a48d7100-1c26-11eb-8710-f307de8081f3.png)  
 원본 데이터 - 단일 테이블로 구성되어있는 데이터셋입니다.
