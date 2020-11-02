@@ -17,7 +17,7 @@ ini_set("display_errors", 1);
 
     if(isset($_GET['fromDate'])){
         $query = "SELECT distinct video_id, title, channelTitle, channelId, date(trending_date) as trending_date, view_count, likes 
-        FROM KR WHERE date(trending_date) >= '{$_GET['fromDate']}' and date(trending_date) <= '{$_GET['toDate']}' and channelTitle != '피지컬갤러리'
+        FROM KR WHERE date(trending_date) >= '{$_GET['fromDate']}' and date(trending_date) <= '{$_GET['toDate']}'
         GROUP BY video_id ORDER BY trending_date LIMIT 20";
         
         $result = mysqli_query($link, $query);

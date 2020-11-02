@@ -46,7 +46,7 @@
     if(isset($_GET['category'])){
         if($_GET['category']) {
             $query = "SELECT distinct video_id, thumbnail_link, title, channelTitle, channelId, publishedAt, view_count, likes 
-            FROM KR WHERE categoryId = {$_GET['category']} and month(publishedAt) = 10 and channelTitle != '피지컬갤러리'
+            FROM KR WHERE categoryId = {$_GET['category']} and month(publishedAt) = 10
             GROUP BY video_id ORDER BY view_count DESC LIMIT 20";
         } else {
             $query = "SELECT distinct video_id, thumbnail_link, title, channelTitle, channelId, publishedAt, view_count, likes 
