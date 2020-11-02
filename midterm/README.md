@@ -33,20 +33,22 @@ Linux 서버를 사용할 경우 window 환경을 사용할 때보다 보안성 
 
 ### 발견한 정보
 1. 인기 비디오 정보 조회 
-    1. 카테고리별 데이터베이스 조회 : select Box에 있는 정치, 스포츠, 음악 등의 카테고리를 사용자가 선택하면 해당 카테고리에 맞는 데이터를 조회수로 정렬하여 보여줍니다.
+1-1 카테고리별 데이터베이스 조회 : select Box에 있는 정치, 스포츠, 음악 등의 카테고리를 사용자가 선택하면 해당 카테고리에 맞는 데이터를 조회수로 정렬하여 보여줍니다.
 ~~~sql
 SELECT distinct video_id, thumbnail_link, title, channelTitle, channelId, publishedAt, view_count, likes 
             FROM KR WHERE categoryId = {$_GET['category']} and month(publishedAt) = 10
             GROUP BY video_id ORDER BY view_count DESC LIMIT 20
 ~~~
 GROUP BY : 일별 트렌딩 데이터이기 때문에, 다른 날짜에 동일한 비디오가 트렌딩 되어 중복 데이터가 다량 발생하였고 따라서 동일한 video_id를 가진 데이터의 경우 하나로 묶고 최초 트렌딩 날짜 기준으로 데이터가 출력되도록 GROUP BY 함수를 이용했습니다.    
-    ii. 태그별 데이터베이스 조회 : 사용자가 해시태그를 검색하면 해당 키워드를 포함하고 있는 비디오 리스트를 출력해서 보여줍니다. LIKE 함수를 이용하였고 기준을 태그로 잡았기 때문에, 제목에 들어가있지 않더라도 태그를 포함하는 비디오가 출력됩니다.
+
+1-2 태그별 데이터베이스 조회 : 사용자가 해시태그를 검색하면 해당 키워드를 포함하고 있는 비디오 리스트를 출력해서 보여줍니다. LIKE 함수를 이용하였고 기준을 태그로 잡았기 때문에, 제목에 들어가있지 않더라도 태그를 포함하는 비디오가 출력됩니다.
 ~~~sql
 SELECT distinct video_id, thumbnail_link, title, channelTitle, channelId, date(publishedAt) as publishedAt, view_count, likes, REPLACE(tags, '|', '  #') as tags
         FROM KR WHERE tags LIKE '%{$_GET['tags']}%' and channelTitle != '피지컬갤러리' and title not like '%가짜사나이%' 
         GROUP BY video_id ORDER BY view_count DESC LIMIT 20
 ~~~
-iii.기간별 데이터베이스 조회 : 사용자가 시작일과 종료일을 선택하면 날짜에 맞는 비디오 리스트를 시간순으로 출력합니다. 시작일과 종료일이 적절하지 않게 들어오는 경우를 방지하여 시작일보다 빠른 종료일은 비활성화 되어있습니다.
+
+1-3 기간별 데이터베이스 조회 : 사용자가 시작일과 종료일을 선택하면 날짜에 맞는 비디오 리스트를 시간순으로 출력합니다. 시작일과 종료일이 적절하지 않게 들어오는 경우를 방지하여 시작일보다 빠른 종료일은 비활성화 되어있습니다.
 ~~~sql
 SELECT distinct video_id, title, channelTitle, channelId, date(trending_date) as trending_date, view_count, likes 
         FROM KR WHERE date(trending_date) >= '{$_GET['fromDate']}' and date(trending_date) <= '{$_GET['toDate']}'
