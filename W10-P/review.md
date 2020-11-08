@@ -8,7 +8,8 @@
 |**설명**|오픈 소스 기반 DBMS|MySQL와 호환되는 오픈 소스 기반 DBMS|상업적 용도로 사용되는 DBMS|
 |**데이터베이스 모델**|RDBMS|RDBMS|RDBMS|
 |**라이선스**|open source+commerical|open source(GPL)|commerical|
-|**소유**|Oracle|MariaDB Enterprise|Oracle|  
+|**소유**|Oracle|MariaDB Enterprise|Oracle|
+
 배우는 수준에서 세 개를 비교하는 것이 큰 의미는 없어보이지만 궁금해서 찾아보았는데 오라클은 기업용이기 때문에 성능면에서 가장 뛰어나다고 한다. 전체 데이터를 select 하는 것을 기준으로 3000개 이내의 데이터를 조회할 때는 큰 차이가 없었지만 약 800만개의 데이터를 조회할 경우 Oracle 23초, MariaDB 236초로 큰 차이를 보였다는 자료를 보았고 차이가 크다는 것을 실감했다.
 2. **MAC에서 JAVA + JDBC + ORACLE 연동하기**
 교수님이 강의하시는 윈도우 환경과 설치 환경이 달라서 조금 다른 방식으로 설치를 해야 했다. docker를 이용해서 Oracle XE를 설치해야한다는 것 빼고는 큰 차이가 없어서 Docker에 관한 내용만 정리해보았다.
