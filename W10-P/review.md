@@ -38,10 +38,10 @@ docker에서 deepdiver의 oracle-xe-11g 이미지 파일을 가져온 후 해당
 
 
 ### 참고 자료 
-[[성능 비교] Oracle과 MariaDB의 간단 성능 비교](https://yeti.tistory.com/61)  
-[MariaDB vs MySQL vs ORACLE](https://db-engines.com/en/system/MariaDB%3BMySQL%3BOracle)  
-[[MAC] oracle-xe-11g & SQL Developer 설치](https://clearstar0817.tistory.com/10)  
-[초보자를 위한 도커 안내서 - 도커란 무엇인가?](https://subicura.com/2017/01/19/docker-guide-for-beginners-1.html)  
+* [[성능 비교] Oracle과 MariaDB의 간단 성능 비교](https://yeti.tistory.com/61)  
+* [MariaDB vs MySQL vs ORACLE](https://db-engines.com/en/system/MariaDB%3BMySQL%3BOracle)  
+* [[MAC] oracle-xe-11g & SQL Developer 설치](https://clearstar0817.tistory.com/10)  
+* [초보자를 위한 도커 안내서 - 도커란 무엇인가?](https://subicura.com/2017/01/19/docker-guide-for-beginners-1.html)  
 
 ### 회고
 **+**
