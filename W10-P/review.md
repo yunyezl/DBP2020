@@ -1,5 +1,5 @@
-# JAVA + JDBC + ORACLE 연동
-#### 배운 내용 정리
+# 10주차 학습 회고 - JAVA + JDBC + ORACLE 연동
+### 배운 내용 
 1. **MySQL, MariaDB, ORACLE**
 지금까지 총 3가지의 DBMS를 배웠다. 비슷하지만 다른 세 개의 DB를 정리해보았다.  
 
@@ -30,20 +30,20 @@ docker exec -it oracle11g-test sqlplus //터미널에서 sqlplus 실행
 자바와 데이터베이스를 연동하는 데에 필요한 API로 DBMS에 전달될 SQL 구문을 각 시스템(Oracle, MySQL 등)에 맞도록 변경해준다.
 
 
-#### 오류 발생 내용 + 해결 과정
+### 오류 발생 내용 + 해결 과정
 docker에서 deepdiver의 oracle-xe-11g 이미지 파일을 가져온 후 해당 이미지를 컨테이너로 생성한 뒤 실행하는 과정에서  
 **docker: Error response from daemon: Ports are not available: listen tcp 0.0.0.0:49161: bind: address already in use.**  
 라는 에러 메세지를 마주했다. 49161 포트가 이미 사용되고 있어서 컨테이너 생성이 불가능하다는 것 같았다.  
 터미널에서 **netstat -anv|grep LISTEN** 명령어를 사용해서 현재 실행중인 프로세스들의 포트 번호를 확인해봤더니 정말로 해당 포트 번호가 이용되고 있었고 **sudo lsof -i:49161** 를 이용해서 어떤 프로세스인지 확인해보니 UserEvent라는 프로세스가 사용하고 있었다. 건드리면 안될 것 같아서 그냥 deepdiver의 이미지가 아닌 1521 포트번호를 사용하는 jaspeen의 이미지를 새로 가져와서 연결을 해주었더니 해결되었다.
 
 
-#### 참고 자료 
+### 참고 자료 
 [[성능 비교] Oracle과 MariaDB의 간단 성능 비교](https://yeti.tistory.com/61)  
 [MariaDB vs MySQL vs ORACLE](https://db-engines.com/en/system/MariaDB%3BMySQL%3BOracle)  
 [[MAC] oracle-xe-11g & SQL Developer 설치](https://clearstar0817.tistory.com/10)  
 [초보자를 위한 도커 안내서 - 도커란 무엇인가?](https://subicura.com/2017/01/19/docker-guide-for-beginners-1.html)  
 
-#### 회고
+### 회고
 **+**
 > 비교적 익숙한 언어인 JAVA로 데이터베이스 프로그래밍을 하게 돼서 기대된다. 자바 수업을 들을 때 인텔리제이로 수업을 하셨어서 이클립스를 처음 써봤는데 아직은 인텔리제이가 조금 더 편한 것 같다. 그래서 두 개 다 연동을 시켜놨는데 둘 다 써보면서 나한테 더 적합한 IDE를 찾아서 사용해야겠다. 인텔리제이 Ultimate 버전은 SQL Developer와 비슷한 기능을 하는(걸로 추정되는) 데이터베이스탭을 제공해서 한 가지 IDE로 작업을 할 수 있는 장점이 있는 것 같다.(학생 인증을 했더니 무료로 사용이 가능했다.)
 
