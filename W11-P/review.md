@@ -18,7 +18,7 @@
 * 외부 동작을 바꾸지 않으면서 내부적으로 코드를 개선하여 보다 이해하기 쉽고, 변경이 용이하도록 함. 이번 강의에서는 select, update 등 DML을 실행할 때마다 DB에 연결, 해제하는 코드를 작성했던 것을 하나의 메서드(각각 getConnection, closeAll) 로 만듦으로서 중복을 제거함.
 
 ## 오류 발생 내용 + 해결 과정
-* **the network adapter could not establish the connection 에러**.  
+* **the network adapter could not establish the connection 에러**  
 10주차 실습에서 연결이 되는 것을 확인한 후  11주차 실습을 위해 다시 연결 테스트를 했는데 연결이 되지 않았다. 나의 실습 환경의 경우 docker를 이용하여 oracle xe를 설치하였기 때문에 docker를 실행한 후 실습을 진행해야한다는 것을 간과했다. 
 * **IntelliJ 모듈 추가 시 라이브러리가 적용되지 않는 문제**  
 이클립스의 경우 workspace에 여러 프로젝트를 추가하여 실습을 진행할 수 있지만 인텔리제이의 경우 별도의 워크스페이스가 존재하지 않는다. 그래서 DBP 라는 빈 상위 프로젝트를 생성하고 프로젝트의 하위 모듈로 W10, W11와 같이 주차별 모듈을 추가하는 방식으로 실습을 진행하려고 했는데 모듈을 새로 추가한 후 연결 테스트를 하니 ClassNotFoundException 에러가 발생했다. 외부 라이브러리로 가져왔던 JDBC인 ojdbc6.jar 파일이 새로 추가된 모듈에 적용되지 않아서 생기는 문제인 것 같아 다음과 같은 과정을 진행했다.  
