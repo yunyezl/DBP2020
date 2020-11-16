@@ -34,4 +34,9 @@ File -> Project Structure -> Modules Tab 선택 -> 모듈 선택(나의 경우 W
 **-**
 > 수업을 들을 때 집중력이 너무 떨어진다. 강의당 러닝타임이 길지도 않은데 자꾸만 핸드폰을 본다. 10분짜리를 듣고 20분은 족히 쉰다.. 왜 이럴까..  
 
+**!**
+> 슬랙 큐엔에이를 통해 select를 할 때 윌리엄만 가리키는 오류를 해결할 수 있었다!  
+
 [DBP 11주차 과제 녹화 - YouTube](https://www.youtube.com/watch?v=As1D2Pwey-0&feature=youtu.be)
+: departments 테이블의 마지막줄 데이터 조회 후 content development라는 새로운 부서를 추가한 후, 부서의 location_id를 1800에서 1700으로 수정함.
+이후에 추가했던 데이터를 삭제하고 다시 조회함.
