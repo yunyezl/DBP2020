@@ -4,7 +4,7 @@
 
 * MySQL vs mongoDB 용어/구문 비교
 |MySQL 용어|mongoDB 용어|
-|——|——|
+|--|--|
 |database|database|
 |table|collection|
 |index|index|
@@ -14,12 +14,12 @@
 |primary key|_id field|
 |group by|aggegation|
 
-|SQL 구문|mongoDB 구문|
-|———|——|
-|CREATE TABLE USERS(a Number, b Number)|db.createCollection(“mycoll”)|
-|INSERT INTO USERS VALUES(3, 5)|db.users.insert({a:3, b:5})|
-|SELECT * FROM users|db.users.find()|
-|SELECT a,b FROM users WHERE age=20|db.users.find({age:20}, {a:1, b:1})|
+|SQL 구문|mongoDB 구문|  
+|--|--|  
+|CREATE TABLE USERS(a Number, b Number)|db.createCollection(“mycoll”)|  
+|INSERT INTO USERS VALUES(3, 5)|db.users.insert({a:3, b:5})|  
+|SELECT * FROM users|db.users.find()|  
+|SELECT a,b FROM users WHERE age=20|db.users.find({age:20}, {a:1, b:1})|  
 
 ## 오류 발생 내용
 없었음
@@ -36,4 +36,4 @@
 **!**
 > 교수님이 맥 사용자들까지 챙겨주셔서 편리하게 설치할 수 있었다!
 
-[14주차 과제 - YouTube](https://youtu.be/Po_sBvaCL94) : 녹화하면서 입력하면 보기 힘드실 거 같아서 미리 작성해놓고 복사해서 사용했습니다 😀
+[14주차 과제 - YouTube](https://youtu.be/Po_sBvaCL94) - 녹화하면서 입력하면 보기 힘드실 거 같아서 미리 작성해놓고 복사해서 사용했습니다 😀
