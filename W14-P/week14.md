@@ -2,7 +2,8 @@
 ## 새로 배운 내용
 * mongoDB : 도큐먼트 지향 데이터베이스 시스템으로 대규모 시스템에 적합하며 RDBMS에 비해 높은 확장성을 지니고 있다. SQL문을 사용하지 않는 NoSQL이다. mongoDB는 Database, Collection, Document 구조로 설계가 되어있는데, RDBMS에 비유하자면 Collection은 테이블, Document는 데이터 정도로 생각할 수 있다.  RDBMS와 달리 스키마가 존재하지 않으며, BSON 형태로 각 문서가 저장된다.
 
-* MySQL vs mongoDB 용어/구문 비교
+* MySQL vs mongoDB 용어/구문 비교  
+
 |MySQL 용어|mongoDB 용어|
 |--|--|
 |database|database|
