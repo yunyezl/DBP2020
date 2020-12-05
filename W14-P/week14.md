@@ -20,7 +20,8 @@
 |CREATE TABLE USERS(a Number, b Number)|db.createCollection(“mycoll”)|  
 |INSERT INTO USERS VALUES(3, 5)|db.users.insert({a:3, b:5})|  
 |SELECT * FROM users|db.users.find()|  
-|SELECT a,b FROM users WHERE age=20|db.users.find({age:20}, {a:1, b:1})|  
+|SELECT a,b FROM users WHERE age=20|db.users.find({age:20}, {a:1, b:1})|
+|DELETE FROM users WHERE age=20|db.users.deleteMany({age:20})|
 
 ## 오류 발생 내용
 없었음
