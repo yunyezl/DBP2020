@@ -29,7 +29,7 @@
 ## 참고한 내용
 [mongoDB란? - 한 눈에 끝내는 Node.js](https://edu.goorm.io/learn/lecture/557/%ED%95%9C-%EB%88%88%EC%97%90-%EB%81%9D%EB%82%B4%EB%8A%94-node-js/lesson/174384/mongodb%EB%9E%80)
 
-##회고
+## 회고
 **+**
 > NoSQL에 대해서 평소에 궁금했었는데 이번 기회에 알 수 있게 되어 좋았다.  아직 잘은 모르지만 compass라는 툴이 매우 편해보였고, 나중에 기회가 된다면 다른 프로젝트에 nodejs+mongoDB로 서버를 만들어서 적용시키고 싶다!
 
